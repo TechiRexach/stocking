@@ -1,2 +1,19 @@
-<h1 class='bg-dark text-light'>Stocking</h1>
-<p>HOME PAGE</p>
+<h1 class='bg-dark text-light text-center'>Companies Info</h1>
+
+<%= form_tag root_path , :method => 'POST' do %>
+    <%= text_field_tag 'company', nil, placeholder: 'Enter Ticker Symbol', size: 50 %>
+    <%= submit_tag 'Lookup' %>
+<% end %>
+
+<%
+=begin%>
+ <% @stock = StockQuote::Stock.dividends("fb") %> 
+<%
+=end%>
+<% if @stock %>
+    <%= @stock.company_name %>
+    <br>
+    <%= @stock.symbol %>
+<% end %>
+
+
