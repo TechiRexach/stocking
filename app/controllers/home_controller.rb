@@ -10,7 +10,6 @@ class HomeController < ApplicationController
       if !@stock 
         @error = 'Hey, that stock symbol doesnt exist'
       end
-      
     end
     
   end
