@@ -13,7 +13,10 @@
 <% if @stock %>
     <%= @stock.company_name %>
     <br>
-    <%= @stock.symbol %>
+<% elsif @nothing%>
+    <%= @nothing %>
 <% end %>
 
-
+<% if @error%>
+    <%= @error %>
+<% end %>
