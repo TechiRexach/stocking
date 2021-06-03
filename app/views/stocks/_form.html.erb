@@ -16,9 +16,9 @@
     <%= form.text_field :ticker %>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+  <div class="field mb-2">
+    <% form.label :user_id %>
+    <%= form.text_field :user_id , value: current_user.id, type: :hidden %>
   </div>
 
   <div class="actions">
