@@ -1,7 +1,7 @@
 <h1 class='bg-dark text-light text-center'>Companies Info</h1>
 
 <%= form_tag root_path , :method => 'POST' do %>
-    <%= text_field_tag 'company', nil, placeholder: 'Enter Ticker Symbol', size: 50 %>
+    <%= text_field_tag 'ticker', nil, placeholder: 'Enter Ticker Symbol', size: 50 %>
     <%= submit_tag 'Lookup' %>
 <% end %>
 
