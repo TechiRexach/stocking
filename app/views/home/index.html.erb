@@ -8,9 +8,15 @@
 <% if @stock %>
     <h3> <%= @stock.company_name %> </h3>
 <% elsif @nothing%>
-    <p class='alert alert-warning'> <%= @nothing %> </p>
+    <div class='alert alert-warning alert-dismissible fade show' role="alert">  
+     <%= @nothing %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 <% end %>
 
 <% if @error%>
-    <p class='alert alert-warning'> <%= @error %> </p>
+    <div class='alert alert-warning alert-dismissible fade show' role="alert"> 
+     <%= @error %> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 <% end %>

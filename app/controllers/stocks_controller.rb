@@ -6,11 +6,21 @@ class StocksController < ApplicationController
 
   # GET /stocks or /stocks.json
   def index
-    @stocks = Stock.all
+    begin
+      @stocks = Stock.all
+    rescue => e
+      @error = e
+    end
   end
 
   # GET /stocks/1 or /stocks/1.json
   def show
+    begin
+      @stock_details = StockQuote::Stock.company(@stock.ticker)
+      @logo = StockQuote::Stock.logo(@stock.ticker)
+    rescue => e
+      @error = e
+    end
   end
 
   # GET /stocks/new

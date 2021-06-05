@@ -11,32 +11,24 @@
 
   <tbody>
     <% @stocks.each do |stock| %>
+    
+      <% @stock_details = StockQuote::Stock.quote(stock.ticker) %> 
+
       <% if stock.user_id == current_user.id %>
-
-          <%  @stock_details = StockQuote::Stock.quote(stock.ticker)%>
-
-          <% if !@stock_details %>
-             <td><%= link_to 'Error', stock %></td>
-              <td> N/A </td>
-              <td> N/A </td>
-              <td> N/A </td>
-              <td><%= link_to 'Edit', edit_stock_path(stock), class:'btn btn-secondary' %></td>
-              <td><%= link_to 'Delete', stock, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
-          <% else  %>
-            <tr>
-              <td><%= link_to @stock_details.company_name, stock %></td>
-              <td><%= @stock_details.symbol %></td>
-              <td>$ <%= number_with_precision(@stock_details.latest_price, :precision => 2, :delimiter => ',') %></td>
-              <td>$ <%= number_with_precision(@stock_details.market_cap, :precision => 2, :delimiter => ',') %></td>
-              <td><%= link_to 'Edit', edit_stock_path(stock), class:'btn btn-secondary' %></td>
-              <td><%= link_to 'Delete', stock, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
-            </tr>
-          <%  end%>
+         <tr>
+            <td><%= link_to @stock_details.company_name, stock %></td>
+            <td><%= @stock_details.symbol %></td>
+            <td>$ <%= number_with_precision(@stock_details.latest_price, :precision => 2, :delimiter => ',') %></td>
+            <td>$ <%= number_with_precision(@stock_details.market_cap, :precision => 2, :delimiter => ',') %></td>
+            <td><%= link_to 'Edit', edit_stock_path(stock), class:'btn btn-secondary' %></td>
+            <td><%= link_to 'Delete', stock, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
+          </tr>
       <% end %>
     <% end %>
   </tbody>
+  
 </table>
 
-<br>
+<%= @error %>
 
 <%= link_to 'New Stock', new_stock_path, class:'btn btn-success' %>
