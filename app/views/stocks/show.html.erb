@@ -1,12 +1,28 @@
-<p>
-  <strong>Ticker:</strong>
-  <%= @stock.ticker %>
-</p>
+          <%  
+          begin
+            @stock_details = StockQuote::Stock.quote(@stock.ticker)
+            @logo = StockQuote::Stock.logo(@stock.ticker)
+          rescue => e
+            puts e
+          end
+          %>
 
-<p>
-  <strong>User:</strong>
-  <%= @stock.user_id %>
-</p>
+<% if @stock_details %>
+<div class="card mb-5 col-md-6 offset-md-4 mb-5 bg-body rounded p-3 " style="width: 20rem;">
+<h4 class="card-title text-center mt-3"><%= @stock_details.company_name %></h4>
+  <img src=<%= @logo.url %> class="card-img-top mt-2" alt="...">
+  <div class="card-body">
+    <p class="card-text"><%= @stock_details.industry %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><%= @stock_details.website %></li>
+    <li class="list-group-item"><%= @stock_details.ceo %></li>
+    <li class="list-group-item"><%= @stock_details.state %></li>
+  </ul>
+</div>
+<% else %>
+<h4 class="card-title text-center mt-3">ERROR</h4>
+<% end %>
 
-<%= link_to 'Edit', edit_stock_path(@stock) %> |
-<%= link_to 'Back', stocks_path %>
+<%= link_to 'Edit', edit_stock_path(@stock), class:'btn btn-warning' %> |
+<%= link_to 'Back', stocks_path, class:'btn btn-secondary' %>

@@ -2,21 +2,15 @@
 
 <%= form_tag root_path , :method => 'POST' do %>
     <%= text_field_tag 'ticker', nil, placeholder: 'Enter Ticker Symbol', size: 50 %>
-    <%= submit_tag 'Lookup' %>
+    <%= submit_tag 'Lookup', class:'btn btn-secondary' %>
 <% end %>
 
-<%
-=begin%>
- <% @stock = StockQuote::Stock.dividends("fb") %> 
-<%
-=end%>
 <% if @stock %>
-    <%= @stock.company_name %>
-    <br>
+    <h3> <%= @stock.company_name %> </h3>
 <% elsif @nothing%>
-    <%= @nothing %>
+    <p class='alert alert-warning'> <%= @nothing %> </p>
 <% end %>
 
 <% if @error%>
-    <%= @error %>
+    <p class='alert alert-warning'> <%= @error %> </p>
 <% end %>

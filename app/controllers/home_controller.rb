@@ -6,9 +6,11 @@ class HomeController < ApplicationController
     if params[:ticker] == ''
       @nothing = 'Hey, you forgot to enter a symbol!'
     elsif params[:ticker]
-      @stock = StockQuote::Stock.quote(params[:ticker])
-      if !@stock 
-        @error = 'Hey, that stock symbol doesnt exist'
+      begin
+        @stock = StockQuote::Stock.quote(params[:ticker])
+      rescue => e
+        @error = e
+        puts e
       end
     end
   end
@@ -16,3 +18,7 @@ class HomeController < ApplicationController
   def about
   end
 end
+
+
+
+
